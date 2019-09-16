@@ -26,7 +26,6 @@ public class ArithmeticGenerator {
     private boolean showFinalResult = false;
     private OnGenerateArithmeticListener listener;
 
-
     public interface OnGenerateArithmeticListener{
         /**
          * 生成一条算式时回调
