@@ -3,7 +3,7 @@
 # 截图
 <div>
     <img src="https://github.com/Z-P-J/ArithmeticGenerator/blob/master/screenshots/screenshots1.png?raw=true" height="660" width="380">
-    <img src="https://github.com/Z-P-J/ArithmeticGenerator/blob/master/screenshots/screenshots2.png?raw=true" height="660" width="660>
+    <img src="https://github.com/Z-P-J/ArithmeticGenerator/blob/master/screenshots/screenshots2.png?raw=true" height="660" width="660">
 </div>
 
 
