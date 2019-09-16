@@ -1,5 +1,5 @@
 # ArithmeticGenerator算式生成器
-![screenshot1](screenshots/pic1.png)
+![screenshot1](screenshots/pic1.jpg)
 # 截图
 ![screenshot1](screenshots/screenshots1.png)
 ![screenshot1](screenshots/screenshots2.png)
