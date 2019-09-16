@@ -1,11 +1,8 @@
 # ArithmeticGenerator算式生成器
-
+![screenshot1](screenshots/pic1.png)
 # 截图
-<div>
-    <img src="https://github.com/Z-P-J/ArithmeticGenerator/blob/master/screenshots/screenshots1.png?raw=true" height="660" width="380">
-    <img src="https://github.com/Z-P-J/ArithmeticGenerator/blob/master/screenshots/screenshots2.png?raw=true" height="660" width="660">
-</div>
-
+![screenshot1](screenshots/screenshots1.png)
+![screenshot1](screenshots/screenshots2.png)
 
 # 如何使用？
 ```java
