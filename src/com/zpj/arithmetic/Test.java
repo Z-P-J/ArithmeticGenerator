@@ -20,7 +20,7 @@ public class Test {
                 .addOperator(ArithmeticOperator.SUBTRACTION) // 添加减法运算符
                 .addOperator(ArithmeticOperator.MULTIPLICATION) // 添加乘法运算符
                 .addOperator(ArithmeticOperator.DIVISION) // 添加除法运算符
-                .addOperator(com.zpj.arithmetic.impl.ArithmeticOperator.MOD) // 添加取余运算符
+//                .addOperator(ArithmeticOperator.MOD) // 添加取余运算符
                 .setListener(new ArithmeticGenerator.OnGenerateArithmeticListener() {
                     @Override
                     public void onGenerate(int index, String arithmetic, String result) {

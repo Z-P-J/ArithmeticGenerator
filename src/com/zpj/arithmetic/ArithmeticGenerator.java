@@ -14,7 +14,9 @@ import java.util.List;
  * @author Z-P-J
  */
 public class ArithmeticGenerator {
+
     private final List<ArithmeticOperator> operatorList = new ArrayList<>();
+    private final List<Integer> integers = new ArrayList<>();
     private int operandCount;
     private int questionCount = 10;
     private boolean limitFinalResult = false;
@@ -28,7 +30,6 @@ public class ArithmeticGenerator {
     private int maxIntermediateResult = Integer.MAX_VALUE;
     private int minFinalResult = Integer.MIN_VALUE;
     private int maxFinalResult = Integer.MAX_VALUE;
-    private boolean showFinalResult = false;
     private OnGenerateArithmeticListener listener;
 
     public interface OnGenerateArithmeticListener{
@@ -131,16 +132,6 @@ public class ArithmeticGenerator {
     }
 
     /**
-     * 是否显示最终结果
-     * @param showFinalResult 是否显示最终结果
-     * @return this
-     */
-    public ArithmeticGenerator setShowFinalResult(boolean showFinalResult) {
-        this.showFinalResult = showFinalResult;
-        return this;
-    }
-
-    /**
      * 添加运算符
      * @param operator 操作符
      * @return this
@@ -213,6 +204,7 @@ public class ArithmeticGenerator {
      * @return 算式的字符串
      */
     private String[] generateArithmetic() {
+        integers.clear();
         Calculator calculator = new Calculator();
         calculator.setEnableExactDivision(enableExactDivision);
         ArithmeticOperator preOperator = null;
@@ -268,13 +260,6 @@ public class ArithmeticGenerator {
             }
 
         }
-
-//        String arithmetic;
-//        if (showFinalResult) {
-//            arithmetic = calculator.getArithmeticAndResult();
-//        } else {
-//            arithmetic = calculator.getArithmetic();
-//        }
         String[] results = new String[2];
         results[0] = calculator.getArithmetic();
         results[1] = String.valueOf(calculator.calculate());
@@ -317,8 +302,19 @@ public class ArithmeticGenerator {
         }
     }
 
+    /**
+     * 随机生成算术运算符
+     * @return 算术运算符
+     */
     private ArithmeticOperator getRandomOperator() {
-        return operatorList.get((int) (Math.random() * operatorList.size()));
+        if (integers.isEmpty()) {
+            for (int i = 0; i < operatorList.size(); i++) {
+                integers.add(i);
+            }
+        }
+        int index = integers.remove((int) (Math.random() * integers.size()));
+        return operatorList.get(index);
+//        return operatorList.get((int) (Math.random() * operatorList.size()));
     }
 
     /**
