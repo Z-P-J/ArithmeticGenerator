@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d1f75e11-62f2-4491-8e0a-c996596b8716" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/zpj/arithmetic/base/Operator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zpj/arithmetic/ArithmeticGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zpj/arithmetic/ArithmeticGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zpj/arithmetic/ArithmeticOperand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zpj/arithmetic/impl/IntegerOperand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zpj/arithmetic/ArithmeticOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zpj/arithmetic/impl/ArithmeticOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zpj/arithmetic/BracketOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zpj/arithmetic/impl/BracketOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zpj/arithmetic/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zpj/arithmetic/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zpj/arithmetic/Operable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zpj/arithmetic/base/Operable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zpj/arithmetic/Operator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zpj/arithmetic/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zpj/arithmetic/Test.java" afterDir="false" />
-    </list>
+    <list default="true" id="d1f75e11-62f2-4491-8e0a-c996596b8716" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +23,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/zpj/arithmetic/Calculator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="65">
@@ -60,52 +48,16 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/zpj/arithmetic/impl/IntegerOperand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding>
-                <element signature="e#279#280#0" expanded="true" />
-                <element signature="e#309#310#0" expanded="true" />
-                <element signature="e#533#534#0" expanded="true" />
-                <element signature="e#579#580#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/screenshots/pic1.jpg">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/zpj/arithmetic/base/Operable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="13" lean-forward="true" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/zpj/arithmetic/impl/DoubleOperand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding>
-                <element signature="e#171#172#0" expanded="true" />
-                <element signature="e#209#210#0" expanded="true" />
-                <element signature="e#236#237#0" expanded="true" />
-                <element signature="e#266#267#0" expanded="true" />
-                <element signature="e#490#491#0" expanded="true" />
-                <element signature="e#536#537#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="361">
-                <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
+              <first_editor relative-caret-position="342">
+                <caret line="18" column="50" lean-forward="true" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
               </first_editor>
               <second_editor />
             </state>
@@ -222,11 +174,11 @@
         <option value="$PROJECT_DIR$/src/com/zpj/arithmetic/Operand.java" />
         <option value="$PROJECT_DIR$/src/com/zpj/arithmetic/Operator.java" />
         <option value="$PROJECT_DIR$/src/com/zpj/arithmetic/base/Operator.java" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/com/zpj/arithmetic/impl/ArithmeticOperator.java" />
         <option value="$PROJECT_DIR$/src/com/zpj/arithmetic/Test.java" />
         <option value="$PROJECT_DIR$/src/com/zpj/arithmetic/ArithmeticGenerator.java" />
         <option value="$PROJECT_DIR$/src/com/zpj/arithmetic/Calculator.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -249,6 +201,11 @@
             <path>
               <item name="ArithmeticGenerator" type="b2602c69:ProjectViewProjectNode" />
               <item name="ArithmeticGenerator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ArithmeticGenerator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ArithmeticGenerator" type="462c0819:PsiDirectoryNode" />
+              <item name="screenshots" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ArithmeticGenerator" type="b2602c69:ProjectViewProjectNode" />
@@ -304,6 +261,7 @@
       <recent name="com.zpj.arithmetic" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Programming\IdeaProjects\ArithmeticGenerator\screenshots" />
       <recent name="D:\Programming\IdeaProjects\ArithmeticGenerator\src" />
     </key>
   </component>
@@ -344,18 +302,18 @@
       <option name="presentableId" value="Default" />
       <updated>1568528174692</updated>
       <workItem from="1568528178369" duration="32840000" />
-      <workItem from="1569650001301" duration="6306000" />
+      <workItem from="1569650001301" duration="6556000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39146000" />
+    <option name="totallyTimeSpent" value="39396000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="878" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24731903" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24731903" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -364,7 +322,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3297587" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.66756034" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.66756034" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3994638" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -470,16 +428,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="361">
-            <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/zpj/arithmetic/base/Operable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
@@ -566,6 +514,25 @@
             <element signature="e#1812#1813#0" expanded="true" />
             <element signature="e#1845#1846#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/screenshots/pic1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/screenshots/screenshots1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/screenshots/screenshots2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="342">
+            <caret line="18" column="50" lean-forward="true" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

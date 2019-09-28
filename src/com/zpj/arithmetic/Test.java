@@ -14,7 +14,6 @@ public class Test {
                 //.setNumRange(-100, 100) // 设置算式中运算数的范围，支持负数，默认0-100
                 .setIntermediateResultRange(0, 100) // 设置中间计算结果的范围
                 .setFinalResultRange(0, 100) // 设置最终计算结果的范围
-                //.setShowFinalResult(true) // 是否显示算式计算结果
                 .setEnableBracket(true) // 启用括号，生成含括号的算式
                 .setEnableExactDivision(true) // 启用整除，生成算式的除法运算中被除数必须被除数整除
                 .addOperator(ArithmeticOperator.ADDITION) // 添加加法运算符
