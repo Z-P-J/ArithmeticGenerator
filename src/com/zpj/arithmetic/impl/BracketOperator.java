@@ -1,20 +1,19 @@
-package com.zpj.arithmetic;
+package com.zpj.arithmetic.impl;
+
+import com.zpj.arithmetic.base.Operator;
 
 /**
  * 括号操作符类
  * @author Z-P-J
  */
+public class  BracketOperator extends Operator {
 
-public enum  BracketOperator implements Operator {
-    /**
-     *
-     */
-    LEFT_BRACKET("("),
-    RIGHT_BRACKET(")");
+    public static final BracketOperator LEFT_BRACKET = new BracketOperator("(");
+    public static final BracketOperator RIGHT_BRACKET = new BracketOperator(")");
 
     private String operator;
 
-    BracketOperator(String operator) {
+    private BracketOperator(String operator) {
         this.operator = operator;
     }
 

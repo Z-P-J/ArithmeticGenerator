@@ -1,18 +1,20 @@
-package com.zpj.arithmetic;
+package com.zpj.arithmetic.impl;
+
+import com.zpj.arithmetic.base.Operand;
 
 /**
- * 操作数
+ * 浮点操作数
  * @author Z-P-J
  */
-public class ArithmeticOperand implements Operable {
+public class DoubleOperand extends Operand {
 
-    private int operand;
+    private double operand;
 
-    public ArithmeticOperand(int operand) {
+    public DoubleOperand(double operand) {
         this.operand = operand;
     }
 
-    public int getNum() {
+    public double getNum() {
         return operand;
     }
 

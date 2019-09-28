@@ -1,5 +1,11 @@
 package com.zpj.arithmetic;
 
+import com.zpj.arithmetic.base.Operable;
+import com.zpj.arithmetic.base.Operator;
+import com.zpj.arithmetic.impl.ArithmeticOperator;
+import com.zpj.arithmetic.impl.BracketOperator;
+import com.zpj.arithmetic.impl.IntegerOperand;
+
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -9,58 +15,103 @@ import java.util.Stack;
  */
 public class Calculator {
 
+    /**
+     * Operable队列
+     */
     private final LinkedList<Operable> operableList = new LinkedList<>();
+    /**
+     * 后缀表达式队列
+     */
     private final LinkedList<Operable> postfixList = new LinkedList<>();
+    /**
+     * 操作符栈
+     */
     private final Stack<Operator> operatorStack = new Stack<>();
-    private final Stack<ArithmeticOperand> calculateStack = new Stack<>();
+    /**
+     * 操作数栈
+     */
+    private final Stack<IntegerOperand> calculateStack = new Stack<>();
     private String arithmetic = "";
     private int result;
     private boolean enableExactDivision;
     private boolean calculated = false;
     private OnCalculateListener listener;
 
+    /**
+     * 添加实现了Operable接口的可操作的对象（操作符和操作数）到队列
+     * @param operable 实现了Operable接口的可操作的对象
+     */
     public void addOperable(Operable operable) {
         operableList.add(operable);
         arithmetic = arithmetic + operable.getValue();
     }
 
+    /**
+     * 获取Operable队列
+     * @return operableList
+     */
     public LinkedList<Operable> getOperableList() {
         return operableList;
     }
 
+    /**
+     * 获取不带结果的算式字符串
+     * @return 结果
+     */
     public String getArithmetic() {
-        return arithmetic + "=";
+        return arithmetic + " = ";
     }
 
+    /**
+     * 获取带结果的算式字符串
+     * @return 结果
+     */
     public String getArithmeticAndResult() {
-        return arithmetic + "=" + calculate();
+        return arithmetic + " = " + calculate();
     }
 
+    /**
+     * 根据Operable队列重新生成算式字符串
+     */
     public void resetArithmetic() {
         StringBuilder builder = new StringBuilder();
         for (Operable operable : operableList) {
             builder.append(operable.getValue());
         }
         arithmetic = builder.toString();
-//        System.out.println("arithmetic=" + arithmetic);
     }
 
+    /**
+     * 设置监听器
+     * @param listener 监听器
+     */
     public void setListener(OnCalculateListener listener) {
         this.listener = listener;
     }
 
+    /**
+     * 设置是否整除
+     * @param enableExactDivision 是否整除
+     */
     public void setEnableExactDivision(boolean enableExactDivision) {
         this.enableExactDivision = enableExactDivision;
     }
 
+    /**
+     * 判断是否已计算出结果
+     * @return 是否已计算出结果
+     */
     public boolean isCalculated() {
         return calculated;
     }
 
+    /**
+     * 生成后缀队列
+     */
     private void preparePostfixList() {
         while (!operableList.isEmpty()) {
             Operable operable = operableList.pop();
-            if (operable instanceof ArithmeticOperand) {
+            if (operable instanceof IntegerOperand) {
                 postfixList.add(operable);
             } else if (operable instanceof ArithmeticOperator) {
                 ArithmeticOperator operator = (ArithmeticOperator) operable;
@@ -74,9 +125,9 @@ public class Calculator {
 //                System.out.println("pushToStack222=" + operatorStack);
             } else if (operable instanceof BracketOperator) {
                 BracketOperator operator = (BracketOperator) operable;
-//                System.out.println("com.zpj.arithmetic.BracketOperator=" + operator);
+//                System.out.println("com.zpj.arithmetic.impl.BracketOperator=" + operator);
                 if (operator.equal(BracketOperator.LEFT_BRACKET)) {
-//                    System.out.println("com.zpj.arithmetic.BracketOperator.LEFT_BRACKET");
+//                    System.out.println("com.zpj.arithmetic.impl.BracketOperator.LEFT_BRACKET");
                     operatorStack.push(operator);
 //                    System.out.println("111operatorStack=" + operatorStack);
                 } else {
@@ -98,6 +149,10 @@ public class Calculator {
         }
     }
 
+    /**
+     * 将算术运算符入栈
+     * @param operator 算术运算符
+     */
     private void pushToStack(ArithmeticOperator operator) {
         if (operatorStack.isEmpty()) {
             operatorStack.push(operator);
@@ -111,6 +166,10 @@ public class Calculator {
         }
     }
 
+    /**
+     * 计算结果
+     * @return 结果
+     */
     public int calculate() {
         if (calculated) {
             return result;
@@ -118,11 +177,11 @@ public class Calculator {
         preparePostfixList();
         while (!postfixList.isEmpty()) {
             Operable operable = postfixList.pop();
-            if (operable instanceof ArithmeticOperand) {
-                calculateStack.push((ArithmeticOperand) operable);
+            if (operable instanceof IntegerOperand) {
+                calculateStack.push((IntegerOperand) operable);
             } else if (operable instanceof ArithmeticOperator){
-                ArithmeticOperand operableSecond = calculateStack.pop();
-                ArithmeticOperand operableFirst = calculateStack.pop();
+                IntegerOperand operableSecond = calculateStack.pop();
+                IntegerOperand operableFirst = calculateStack.pop();
                 ArithmeticOperator operator = (ArithmeticOperator) operable;
                 if (operator.equal(ArithmeticOperator.DIVISION) || operator.equal(ArithmeticOperator.MOD)) {
                     if (operableSecond.getNum() == 0) {
@@ -134,7 +193,7 @@ public class Calculator {
                         return 0;
                     }
                 }
-                ArithmeticOperand result = operator.calculate(operableFirst, operableSecond);
+                IntegerOperand result = operator.calculate(operableFirst, operableSecond);
                 calculateStack.push(result);
                 if (!calculateStack.isEmpty() && listener != null) {
                     if (listener.onIntermediateCal(result.getNum())) {
@@ -150,9 +209,9 @@ public class Calculator {
 
     public interface OnCalculateListener{
         /**
-         *
-         * @param intermediateValue
-         * @return
+         * 中间结算时回调
+         * @param intermediateValue 计算结果
+         * @return 计算结果是否有效
          */
         boolean onIntermediateCal(int intermediateValue);
     }

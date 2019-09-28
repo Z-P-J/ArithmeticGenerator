@@ -1,4 +1,4 @@
-package com.zpj.arithmetic;
+package com.zpj.arithmetic.base;
 
 /**
  * Operable接口
@@ -8,7 +8,7 @@ public interface Operable {
 
     /**
      * 获取值
-     * @return
+     * @return value
      */
     String getValue();
 

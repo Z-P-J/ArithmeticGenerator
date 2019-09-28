@@ -1,5 +1,10 @@
 package com.zpj.arithmetic;
 
+import com.zpj.arithmetic.base.Operable;
+import com.zpj.arithmetic.impl.ArithmeticOperator;
+import com.zpj.arithmetic.impl.BracketOperator;
+import com.zpj.arithmetic.impl.IntegerOperand;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,10 +33,12 @@ public class ArithmeticGenerator {
 
     public interface OnGenerateArithmeticListener{
         /**
-         * 生成一条算式时回调
+         * 生成一条算式时回调的监听器
+         * @param index index
          * @param arithmetic the arithmetic formula
+         * @param result 计算结果
          */
-        void onGenerate(String arithmetic);
+        void onGenerate(int index, String arithmetic, String result);
     }
 
     private ArithmeticGenerator() {
@@ -42,6 +49,11 @@ public class ArithmeticGenerator {
         return new ArithmeticGenerator();
     }
 
+    /**
+     * 设置题目中运算数个数
+     * @param operandCount 运算数个数
+     * @return this
+     */
     public ArithmeticGenerator setOperandCount(int operandCount) {
         if (operandCount < 2) {
             throw new RuntimeException("运算数个数不能低于2个");
@@ -50,6 +62,11 @@ public class ArithmeticGenerator {
         return this;
     }
 
+    /**
+     * 设置生成题目数量
+     * @param questionCount 题目数量
+     * @return this
+     */
     public ArithmeticGenerator setQuestionCount(int questionCount) {
         this.questionCount = questionCount;
         return this;
@@ -57,7 +74,7 @@ public class ArithmeticGenerator {
 
     /**
      * 算式中是否可以包含括号
-     * @param enableBracket
+     * @param enableBracket 是否启用括号
      * @return this
      */
     public ArithmeticGenerator setEnableBracket(boolean enableBracket) {
@@ -65,40 +82,45 @@ public class ArithmeticGenerator {
         return this;
     }
 
+    /**
+     * 是否允许整除
+     * @param enableExactDivision 是否整除
+     * @return this
+     */
     public ArithmeticGenerator setEnableExactDivision(boolean enableExactDivision) {
         this.enableExactDivision = enableExactDivision;
         return this;
     }
 
     /**
-     *
-     * @param minNum
-     * @param maxNum
+     * 设置生成题目中数字的范围
+     * @param min 最小值
+     * @param max 最大值
      * @return this
      */
-    public ArithmeticGenerator setNumRange(int minNum, int maxNum) {
-        this.minNum = minNum;
-        this.maxNum = maxNum;
+    public ArithmeticGenerator setNumRange(int min, int max) {
+        this.minNum = min;
+        this.maxNum = max;
         return this;
     }
 
     /**
-     *
-     * @param minIntermediateResult
-     * @param maxIntermediateResult
+     * 设置中间计算结果范围
+     * @param min 最小值
+     * @param max 最大值
      * @return this
      */
-    public ArithmeticGenerator setIntermediateResultRange(int minIntermediateResult, int maxIntermediateResult) {
+    public ArithmeticGenerator setIntermediateResultRange(int min, int max) {
         limitIntermediateResult = true;
-        this.minIntermediateResult = minIntermediateResult;
-        this.maxIntermediateResult = maxIntermediateResult;
+        this.minIntermediateResult = min;
+        this.maxIntermediateResult = max;
         return this;
     }
 
     /**
-     *
-     * @param minFinalResult
-     * @param maxFinalResult
+     * 设置最终计算结果范围
+     * @param minFinalResult 最小值
+     * @param maxFinalResult 最大值
      * @return this
      */
     public ArithmeticGenerator setFinalResultRange(int minFinalResult, int maxFinalResult) {
@@ -109,8 +131,8 @@ public class ArithmeticGenerator {
     }
 
     /**
-     *
-     * @param showFinalResult
+     * 是否显示最终结果
+     * @param showFinalResult 是否显示最终结果
      * @return this
      */
     public ArithmeticGenerator setShowFinalResult(boolean showFinalResult) {
@@ -120,7 +142,7 @@ public class ArithmeticGenerator {
 
     /**
      * 添加运算符
-     * @param operator
+     * @param operator 操作符
      * @return this
      */
     public ArithmeticGenerator addOperator(ArithmeticOperator operator) {
@@ -131,8 +153,8 @@ public class ArithmeticGenerator {
     }
 
     /**
-     *
-     * @param operators
+     * 设置多个操作符
+     * @param operators 操作符列表
      * @return this
      */
     public ArithmeticGenerator addOperators(List<ArithmeticOperator> operators) {
@@ -142,11 +164,21 @@ public class ArithmeticGenerator {
         return this;
     }
 
+    /**
+     * 设置监听器
+     * @param listener 监听器
+     * @return this
+     */
     public ArithmeticGenerator setListener(OnGenerateArithmeticListener listener) {
         this.listener = listener;
         return this;
     }
 
+    /**
+     * 是否开启debug模式
+     * @param debug 是否开启debug
+     * @return this
+     */
     public ArithmeticGenerator setDebug(boolean debug) {
         this.debug = debug;
         return this;
@@ -165,7 +197,9 @@ public class ArithmeticGenerator {
         for (int i = 0; i < questionCount; i++) {
             println("\n------开始生成算式" + i + "------");
             if (listener != null) {
-                listener.onGenerate(generateArithmetic());
+                Calculator calculator = new Calculator();
+                String[] results = generateArithmetic();
+                listener.onGenerate(i, results[0], results[1]);
             }
             println("------结束生成算式" + i + "------");
         }
@@ -174,13 +208,17 @@ public class ArithmeticGenerator {
         System.out.println(questionCount + "个算式生成完毕，共花费：" + (finishTime - startTime) + "ms");
     }
 
-    private String generateArithmetic() {
+    /**
+     * 生成算式
+     * @return 算式的字符串
+     */
+    private String[] generateArithmetic() {
         Calculator calculator = new Calculator();
         calculator.setEnableExactDivision(enableExactDivision);
         ArithmeticOperator preOperator = null;
-        ArithmeticOperand preOperand = null;
+        IntegerOperand preOperand = null;
         for (int i = 0; i < operandCount; i++) {
-            ArithmeticOperand operand = null;
+            IntegerOperand operand = null;
             println("preOperand=" + preOperand + " preOperator=" + preOperator);
             if (preOperand != null && preOperator != null) {
                 if (preOperator.equal(ArithmeticOperator.DIVISION)) {
@@ -191,7 +229,6 @@ public class ArithmeticGenerator {
                 } else if (preOperator.equal(ArithmeticOperator.MOD)) {
                     do {
                         operand = getRandomOperand();
-//                        System.out.println("preOperand=" + preOperand + " operand=" + operand);
                     } while (operand.getNum() == 0);
                 }
 
@@ -208,8 +245,6 @@ public class ArithmeticGenerator {
                 preOperator = operator;
             }
         }
-
-//        System.out.println("arithmetic=" + calculator.getArithmetic());
 
         if (enableBracket) {
             generateBrackets(calculator);
@@ -234,17 +269,24 @@ public class ArithmeticGenerator {
 
         }
 
-        String arithmetic;
-        if (showFinalResult) {
-            arithmetic = calculator.getArithmeticAndResult();
-        } else {
-            arithmetic = calculator.getArithmetic();
-        }
-        return arithmetic;
+//        String arithmetic;
+//        if (showFinalResult) {
+//            arithmetic = calculator.getArithmeticAndResult();
+//        } else {
+//            arithmetic = calculator.getArithmetic();
+//        }
+        String[] results = new String[2];
+        results[0] = calculator.getArithmetic();
+        results[1] = String.valueOf(calculator.calculate());
+        return results;
     }
 
-    private ArithmeticOperand getRandomOperand() {
-        return new ArithmeticOperand((int) (Math.random() * (maxNum - minNum)) + minNum);
+    /**
+     * 随机获取一个操作数对象
+     * @return 操作数对象
+     */
+    private IntegerOperand getRandomOperand() {
+        return new IntegerOperand((int) (Math.random() * (maxNum - minNum)) + minNum);
     }
 
     /**
@@ -252,14 +294,13 @@ public class ArithmeticGenerator {
      * @param dividend 被除数
      * @return 除数
      */
-    private ArithmeticOperand getDivisor(int dividend) {
+    private IntegerOperand getDivisor(int dividend) {
         if (enableExactDivision) {
             if (dividend > maxNum) {
                 dividend = maxNum;
             } else if (dividend <= 1) {
-                return new ArithmeticOperand(1);
+                return new IntegerOperand(1);
             }
-//            println("dividend=" + dividend);
             List<Integer> integers = new ArrayList<>();
             for (int i = 1; i < dividend; i++) {
                 if (dividend % i == 0) {
@@ -270,7 +311,7 @@ public class ArithmeticGenerator {
             if (integers.size() == 1) {
                 return null;
             }
-            return new ArithmeticOperand(integers.get((int) (Math.random() * integers.size())));
+            return new IntegerOperand(integers.get((int) (Math.random() * integers.size())));
         } else {
             return getRandomOperand();
         }
@@ -280,6 +321,9 @@ public class ArithmeticGenerator {
         return operatorList.get((int) (Math.random() * operatorList.size()));
     }
 
+    /**
+     *
+     */
     class Pair{
         int left;
         int right;
@@ -290,7 +334,7 @@ public class ArithmeticGenerator {
             this.right = right;
         }
 
-        public boolean check(int left, int right) {
+        boolean check(int left, int right) {
             if (this.left >= right) {
                 return false;
             }
@@ -313,6 +357,10 @@ public class ArithmeticGenerator {
         }
     }
 
+    /**
+     * 随机给算式生成括号
+     * @param calculator 计算器对象
+     */
     private void generateBrackets(Calculator calculator) {
         int count = (int) (Math.random() * (operandCount - 1));
         if (count > 0) {
@@ -322,6 +370,7 @@ public class ArithmeticGenerator {
                 int leftPosition = (int) (Math.random() * (operandCount - 1));
                 int rightPosition = (int) (Math.random() * (operandCount - leftPosition - 1)) + leftPosition + 2;
                 if ((rightPosition - leftPosition) == operandCount) {
+
                 } else {
                     boolean flag = true;
                     for (Pair pair : pairs) {

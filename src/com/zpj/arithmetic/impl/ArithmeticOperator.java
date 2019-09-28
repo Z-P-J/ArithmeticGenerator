@@ -1,24 +1,24 @@
-package com.zpj.arithmetic;
+package com.zpj.arithmetic.impl;
+
+import com.zpj.arithmetic.base.Operator;
 
 /**
- * 算式运算符
+ * 算术运算符
  * @author Z-P-J
  */
-public enum ArithmeticOperator implements Operator {
+public class ArithmeticOperator extends Operator {
 
-    /**
-     *
-     */
-    ADDITION("+", 1),
-    SUBTRACTION("-", 1),
-    MULTIPLICATION("*", 2),
-    DIVISION("÷", 2),
-    MOD("%", 2);
+    public static final ArithmeticOperator ADDITION = new ArithmeticOperator(" + ", 1);
+    public static final ArithmeticOperator SUBTRACTION = new ArithmeticOperator(" - ", 1);
+    public static final ArithmeticOperator MULTIPLICATION = new ArithmeticOperator(" × ", 2);
+    public static final ArithmeticOperator DIVISION = new ArithmeticOperator(" ÷ ", 2);
+    public static final ArithmeticOperator MOD = new ArithmeticOperator(" mod ", 2);
+//    public static final ArithmeticOperator ADDITION = new ArithmeticOperator("+", 1);
 
     private String operator;
     private int priority;
 
-    ArithmeticOperator(String operator, int priority) {
+    private ArithmeticOperator(String operator, int priority) {
         this.operator = operator;
         this.priority = priority;
     }
@@ -38,7 +38,13 @@ public enum ArithmeticOperator implements Operator {
         return getValue();
     }
 
-    public ArithmeticOperand calculate(ArithmeticOperand a1, ArithmeticOperand a2) {
+    /**
+     * 根据操作符计算两个操作数
+     * @param a1 操作数1
+     * @param a2 操作数2
+     * @return 计算结果
+     */
+    public IntegerOperand calculate(IntegerOperand a1, IntegerOperand a2) {
         int result = 0;
         if (this.equal(ADDITION)) {
             result = a1.getNum() + a2.getNum();
@@ -51,7 +57,7 @@ public enum ArithmeticOperator implements Operator {
         } else if (this.equal(MOD)) {
             result = a1.getNum() % a2.getNum();
         }
-        return new ArithmeticOperand(result);
+        return new IntegerOperand(result);
     }
 
     @Override
