@@ -23,6 +23,7 @@ public class ArithmeticGenerator {
     private boolean limitIntermediateResult = false;
     private boolean enableBracket = false;
     private boolean enableExactDivision = false;
+    private boolean equalProbability = true;
     private boolean debug = false;
     private int minNum = 0;
     private int maxNum = 100;
@@ -90,6 +91,16 @@ public class ArithmeticGenerator {
      */
     public ArithmeticGenerator setEnableExactDivision(boolean enableExactDivision) {
         this.enableExactDivision = enableExactDivision;
+        return this;
+    }
+
+    /**
+     * 算术运算符是否等概率出现
+     * @param equalProbability 是否等概率
+     * @return this
+     */
+    public ArithmeticGenerator setEqualProbability(boolean equalProbability) {
+        this.equalProbability = equalProbability;
         return this;
     }
 
@@ -307,14 +318,16 @@ public class ArithmeticGenerator {
      * @return 算术运算符
      */
     private ArithmeticOperator getRandomOperator() {
-        if (integers.isEmpty()) {
-            for (int i = 0; i < operatorList.size(); i++) {
-                integers.add(i);
+        if (equalProbability) {
+            if (integers.isEmpty()) {
+                for (int i = 0; i < operatorList.size(); i++) {
+                    integers.add(i);
+                }
             }
+            int index = integers.remove((int) (Math.random() * integers.size()));
+            return operatorList.get(index);
         }
-        int index = integers.remove((int) (Math.random() * integers.size()));
-        return operatorList.get(index);
-//        return operatorList.get((int) (Math.random() * operatorList.size()));
+        return operatorList.get((int) (Math.random() * operatorList.size()));
     }
 
     /**

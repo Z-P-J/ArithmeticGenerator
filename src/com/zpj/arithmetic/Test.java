@@ -16,6 +16,7 @@ public class Test {
                 .setFinalResultRange(0, 100) // 设置最终计算结果的范围
                 .setEnableBracket(true) // 启用括号，生成含括号的算式
                 .setEnableExactDivision(true) // 启用整除，生成算式的除法运算中被除数必须被除数整除
+                .setEqualProbability(true)
                 .addOperator(ArithmeticOperator.ADDITION) // 添加加法运算符
                 .addOperator(ArithmeticOperator.SUBTRACTION) // 添加减法运算符
                 .addOperator(ArithmeticOperator.MULTIPLICATION) // 添加乘法运算符
