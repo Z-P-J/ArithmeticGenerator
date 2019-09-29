@@ -1,4 +1,5 @@
 # ArithmeticGenerator算式生成器
+ [图形化界面版见https://github.com/Z-P-J/ArithmeticGeneratorGUI](https://github.com/Z-P-J/ArithmeticGeneratorGUI)
 ![screenshot1](screenshots/pic1.jpg)
 # 截图
 ![screenshot1](screenshots/screenshots1.png)
