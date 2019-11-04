@@ -1,6 +1,8 @@
 package com.zpj.arithmetic;
 
 import com.zpj.arithmetic.base.Operable;
+import com.zpj.arithmetic.base.Operand;
+import com.zpj.arithmetic.base.Operator;
 import com.zpj.arithmetic.impl.ArithmeticOperator;
 import com.zpj.arithmetic.impl.BracketOperator;
 import com.zpj.arithmetic.impl.IntegerOperand;
@@ -199,8 +201,8 @@ public class ArithmeticGenerator {
         for (int i = 0; i < questionCount; i++) {
             println("\n------开始生成算式" + i + "------");
             if (listener != null) {
-                Calculator calculator = new Calculator();
-                String[] results = generateArithmetic();
+//                Calculator calculator = new Calculator();
+                String[] results = generateArithmetic2();
                 listener.onGenerate(i, results[0], results[1]);
             }
             println("------结束生成算式" + i + "------");
@@ -208,6 +210,135 @@ public class ArithmeticGenerator {
 
         long finishTime = System.currentTimeMillis();
         System.out.println(questionCount + "个算式生成完毕，共花费：" + (finishTime - startTime) + "ms");
+    }
+
+    /**
+     *  生成算式2
+     * @return String[]
+     */
+    private String[] generateArithmetic2() {
+
+        BinaryArithmeticTree tree = new BinaryArithmeticTree();
+        BinaryArithmeticNode root = new BinaryArithmeticNode(getRandomOperand(), getRandomOperator());
+        tree.setRoot(root);
+
+        int count = 1;
+        LinkedList<BinaryArithmeticNode> queue = new LinkedList<>();
+        queue.push(root);
+        while (count != operandCount) {
+            BinaryArithmeticNode currentNode = queue.getFirst();
+            ArithmeticOperator operator = currentNode.getOperator();
+            IntegerOperand operand = currentNode.getOperand();
+
+            BinaryArithmeticNode left = new BinaryArithmeticNode();
+            BinaryArithmeticNode right = new BinaryArithmeticNode();
+            left.setOperator(getRandomOperator());
+            right.setOperator(getRandomOperator());
+            int num = operand.getNum();
+            int max = maxNum, min = minNum;
+            int leftNum = 0;
+            int rightNum = 0;
+            if (ArithmeticOperator.ADDITION == operator) {
+                if (min >= 0) {
+                    if (max < 2 * min || num < 2 * min) {
+                        currentNode.setOperator(getRandomOperator());
+                        continue;
+                    }
+                    max = num - min;
+                } else if (max <= 0) {
+                    if (min > 2 * max || num > 2 * max) {
+                        currentNode.setOperator(getRandomOperator());
+                        continue;
+                    }
+                    min = num - max;
+                } else {
+                    if (num >= max + min) {
+                        min = num - max;
+                    } else {
+                        max = num - min;
+                    }
+                }
+                leftNum = (int) (Math.random() * (max - min)) + min;
+                rightNum = num - leftNum;
+            } else if (ArithmeticOperator.SUBTRACTION == operator){
+                if (min >= 0) {
+                    if (max < 2 * min || num > max - min) {
+                        currentNode.setOperator(getRandomOperator());
+                        continue;
+                    }
+                    max = max - num;
+                } else if (max <= 0) {
+                    if (min > 2 * max || num < min - max) {
+                        currentNode.setOperator(getRandomOperator());
+                        continue;
+                    }
+                    min = min - num;
+                } else {
+                    if (num >= 0) {
+                        max = max - num;
+                    } else {
+                        min = min - num;
+                    }
+                }
+                rightNum = (int) (Math.random() * (max - min)) + min;
+                leftNum = num + rightNum;
+            } else if (ArithmeticOperator.MULTIPLICATION == operator){
+                List<Integer> integers = new ArrayList<>();
+                for (int i = minNum; i < num; i++) {
+                    if (i == 0 || i == 1) {
+                        continue;
+                    }
+                    int res = num / i;
+                    if (num % i == 0 && res >= minNum && res <= minNum) {
+                        integers.add(i);
+                    }
+                }
+                if (integers.isEmpty()) {
+//                    leftNum = 1;
+                    currentNode.setOperator(getRandomOperator());
+                    continue;
+                } else {
+                    leftNum = integers.get((int) (Math.random() * integers.size()));
+                }
+                rightNum = num / leftNum;
+            } else if (ArithmeticOperator.DIVISION == operator){
+                if (num == 0) {
+                    currentNode.setOperator(getRandomOperator());
+                    continue;
+                }
+                List<Integer> integers = new ArrayList<>();
+                for (int i = minNum; i <= maxNum; i++) {
+                    if (i == 0) {
+                        continue;
+                    }
+                    int res = i * num;
+                    if (res >= minNum && res <= maxNum) {
+                        integers.add(i);
+                    }
+                }
+                if (integers.isEmpty()) {
+                    rightNum = 1;
+                } else {
+                    rightNum = integers.get((int) (Math.random() * integers.size()));
+                }
+                leftNum = num * rightNum;
+            }
+            queue.pop();
+            left.setOperand(new IntegerOperand(leftNum));
+            right.setOperand(new IntegerOperand(rightNum));
+            currentNode.setLeftNode(left);
+            currentNode.setRightNode(right);
+
+            queue.push(left);
+            queue.push(right);
+
+            count++;
+        }
+
+        String[] results = new String[2];
+        results[0] = tree.getArithmetic();
+        results[1] = tree.getRoot().getOperand().toString();
+        return results;
     }
 
     /**

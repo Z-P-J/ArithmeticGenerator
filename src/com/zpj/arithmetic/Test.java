@@ -10,7 +10,7 @@ public class Test {
     public static void main(String[] args) {
         ArithmeticGenerator.with()
                 .setOperandCount(3) // 设置运算数个数为3
-                .setQuestionCount(300) // 设置生成的问题个数为300
+                .setQuestionCount(100000) // 设置生成的问题个数为300
                 //.setNumRange(-100, 100) // 设置算式中运算数的范围，支持负数，默认0-100
                 .setIntermediateResultRange(0, 100) // 设置中间计算结果的范围
                 .setFinalResultRange(0, 100) // 设置最终计算结果的范围
@@ -25,7 +25,7 @@ public class Test {
                 .setListener(new ArithmeticGenerator.OnGenerateArithmeticListener() {
                     @Override
                     public void onGenerate(int index, String arithmetic, String result) {
-                        System.out.println(arithmetic + result);
+                        System.out.println(arithmetic + " = " + result);
                     }
                 }) //生成算式时的监听器
                 .start(); // 启动生成器

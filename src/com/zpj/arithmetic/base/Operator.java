@@ -1,7 +1,7 @@
 package com.zpj.arithmetic.base;
 
 /**
- * 操作符接口
+ * 操作符抽象类
  * @author Z-P-J
  */
 public abstract class Operator implements Operable {
